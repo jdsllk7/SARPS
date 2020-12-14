@@ -28,6 +28,8 @@
 <script src="js/addNewUserSubmit.js"></script>
 <script src="js/uploadResults.js"></script>
 <script src="js/replaySubmit.js"></script>
+<script src="js/deleteUser.js"></script>
+<script src="js/editUser.js"></script>
 
 
 

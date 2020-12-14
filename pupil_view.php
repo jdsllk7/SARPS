@@ -106,7 +106,7 @@
           <div class="form-group">
             <label for="sel1">User Type</label>
             <select class="form-control" name="userType">
-              <option>-Select-</option>
+              <option value="">-Select-</option>
               <option value="Pupil">Pupil</option>
               <option value="Teacher">Teacher</option>
             </select>

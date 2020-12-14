@@ -29,6 +29,7 @@ $sql = "CREATE TABLE IF NOT EXISTS users (
 	userNumber VARCHAR(200) NOT NULL,
 	fName VARCHAR(200),
 	lName VARCHAR(200),
+	contact VARCHAR(10),
 	password VARCHAR(200) NOT NULL
 	)";
 // $sql = "DROP TABLE IF EXISTS users";

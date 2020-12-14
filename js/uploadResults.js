@@ -1,13 +1,21 @@
 $(document).ready(function () {
+  $(".userTypeSelect").on("change", function () {
+    if (this.value == "Pupil") {
+      $(".contactInput").attr("disabled", false);
+    } else {
+      $(".contactInput").attr("disabled", true);
+      $(".contactInput").val("");
+    }
+  });
+
   $(document).on("click", ".publishSMSBtn", function () {
     let btn = $(this);
     let prev = $(this).html();
-    $(this).html('<i class="fas fa-spinner fa-spin text-white"></i>');
+    btn.html('<i class="fas fa-spinner fa-spin text-white"></i>');
     setTimeout(function () {
       btn.html(prev);
-      // alert("Results Sent Successfully");
-      feedbackMsg("success", "Results Sent Successfully", "", );
-    }, 3000);
+      $("#sentSMSModal").modal("show");
+    }, 2000);
   });
   $(document).on("click", ".uploadResultsBtn", function () {
     $("#uploadResultsModelForm").trigger("reset");

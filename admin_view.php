@@ -37,9 +37,12 @@
                   <tr>
                     <th>No.</th>
                     <th>Name</th>
+                    <th>Contact</th>
                     <th>User Type</th>
                     <th>User ID</th>
                     <th>Password</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -49,12 +52,19 @@
                     $count = 0;
                     while ($result = mysqli_fetch_assoc($data)) {
                       $count++;
-                      echo '<tr>
+                      echo '<tr class="row' . $result["userId"] . '">
                               <td>' . $count . '.</td>
                               <td>' . $result["fName"] . ' ' . $result["lName"] . '</td>
+                              <td>' . $result["contact"] . '</td>
                               <td>' . $result["userType"] . '</td>
                               <td>' . $result["userNumber"] . '</td>
                               <td>' . $result["password"] . '</td>
+                              <td>
+                                <button class="btn btn-sm btn-dark m-0 editUserBtn" data-toggle="modal" data-target="#editUserModel' . $result["userId"] . '">Edit</button>
+                              </td>
+                              <td>
+                                <button value="' . $result["userId"] . '" class="btn btn-sm btn-danger m-0 deleteUserBtn">Delete</button>
+                              </td>
                             </tr>';
                     }
                   }
@@ -64,9 +74,12 @@
                   <tr>
                     <th>No.</th>
                     <th>Name</th>
+                    <th>Contact</th>
                     <th>User Type</th>
                     <th>User ID</th>
                     <th>Password</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                   </tr>
                 </tfoot>
               </table>
@@ -82,7 +95,17 @@
   </div>
   <!-- /.content -->
 
-  <!-- The Modal -->
+
+  <?php
+  $data = mysqli_query($conn, "SELECT * FROM users WHERE userType != 'admin'");
+  if (mysqli_num_rows($data) != 0) {
+    while ($result = mysqli_fetch_assoc($data)) {
+      include 'editUserModel.php';
+    }
+  }
+  ?>
+
+  <!-- [Add New] The Modal -->
   <form class="modal fade" id="addNewUserForm">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -105,11 +128,15 @@
           </div>
           <div class="form-group">
             <label for="sel1">User Type</label>
-            <select class="form-control" name="userType">
-              <option>-Select-</option>
+            <select class="form-control userTypeSelect" name="userType">
+              <option value="">-Select-</option>
               <option value="Pupil">Pupil</option>
               <option value="Teacher">Teacher</option>
             </select>
+          </div>
+          <div class="form-group">
+            <label>Phone Number:</label>
+            <input type="text" disabled name="contact" class="form-control contactInput">
           </div>
           <div class="form-group">
             <label>User ID:</label>
